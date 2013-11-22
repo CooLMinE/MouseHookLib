@@ -21,6 +21,11 @@ namespace TestProject
             mh.MouseClickUp += mh_MouseClickUp;
         }
 
+        void mh_MouseMove(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("Mouse move: " + e.Location);
+        }
+
         void mh_MouseClickUp(object o, MouseEventArgs e)
         {
             Console.WriteLine("Mouse click up !");
@@ -33,14 +38,9 @@ namespace TestProject
             Console.WriteLine(e.Button);
         }
 
-        void mh_MouseMove(object o, MouseEventArgs e)
-        {
-            Console.WriteLine("Mouse move: " + e.Location);
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mh.UnHook();
+            mh.Unhook();
         }
     }
 }

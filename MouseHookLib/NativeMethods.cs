@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace MouseHookLib.Utilities
+namespace MouseHookLib
 {
-    class NativeMethods
+    internal static class NativeMethods
     {
         /// <summary>
         /// Installs an application-defined hook procedure into a hook chain.

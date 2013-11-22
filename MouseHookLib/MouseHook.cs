@@ -1,5 +1,4 @@
-﻿using MouseHookLib.Utilities;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -10,9 +9,9 @@ namespace MouseHookLib
     {
         private MouseHookLib.Delegates.LowLevelMouseProc mouseProc;
         private static IntPtr hHook = IntPtr.Zero;
-        public event Delegates.OnMouseMove MouseMove;
-        public event Delegates.OnMouseClickDown MouseClickDown;
-        public event Delegates.OnMouseClickUp MouseClickUp;
+        public event EventHandler<MouseEventArgs> MouseMove;
+        public event EventHandler<MouseEventArgs> MouseClickDown;
+        public event EventHandler<MouseEventArgs> MouseClickUp;
 
         public MouseHook()
         {
@@ -29,13 +28,13 @@ namespace MouseHookLib
                 hHook = NativeMethods.SetWindowsHookEx(WindowsMessages.WH_MOUSE_LL, mouseProc, NativeMethods.GetModuleHandle(currentModule.ModuleName), 0);
 
             if (hHook == IntPtr.Zero)
-                throw new Exception("Unable to register mouse hook.");
+                throw new InvalidOperationException("Unable to register mouse hook.");
         }
 
         /// <summary>
         /// Remove the hook from the hook chain.
         /// </summary>
-        public void UnHook()
+        public void Unhook()
         {
             NativeMethods.UnhookWindowsHookEx(hHook);
         }
